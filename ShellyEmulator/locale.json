@@ -1,0 +1,35 @@
+{
+  "translations": {
+    "de": {
+      "Device and Network": "Gerät und Netzwerk",
+      "Configure the device identity for the Shelly emulation here. UDP port handling is defined by the parent socket.": "Konfigurieren Sie hier die Gerätekennung für die Shelly-Emulation. Die UDP-Port-Konfiguration erfolgt über den Parent-Socket.",
+      "Device Name": "Gerätename",
+      "Hostname": "Hostname",
+      "MAC Address": "MAC-Adresse",
+      "Firmware Version": "Firmware-Version",
+      "The UDP port relevant for Marstek is configured on the parent socket.": "Der für Marstek relevante UDP-Port wird am Parent-Socket festgelegt.",
+      "Total": "Gesamt",
+      "Assign the global power and energy variables of the metering point here.": "Ordnen Sie hier die globalen Leistungs- und Energievariablen des Zählerpunkts zu.",
+      "For Marstek control, Total Power and the phase power values L1 to L3 are the most relevant inputs.": "Für die Marstek-Regelung sind in erster Linie Leistung Gesamt sowie die Phasenwerte Leistung L1 bis L3 relevant.",
+      "Total Power": "Leistung Gesamt",
+      "Import Power": "Leistung Bezug",
+      "Export Power": "Leistung Einspeisung",
+      "Import Counter": "Zähler Bezug",
+      "Export Counter": "Zähler Einspeisung",
+      "Counter Scale Factor": "Umrechnungsfaktor Zählerwerte",
+      "Assign the measured values for phase L1 here if they are available individually.": "Hinterlegen Sie hier die Messwerte für Phase L1, falls diese einzeln verfügbar sind.",
+      "Assign the measured values for phase L2 here if they are available individually.": "Hinterlegen Sie hier die Messwerte für Phase L2, falls diese einzeln verfügbar sind.",
+      "Assign the measured values for phase L3 here if they are available individually.": "Hinterlegen Sie hier die Messwerte für Phase L3, falls diese einzeln verfügbar sind.",
+      "Voltage": "Spannung",
+      "Current": "Strom",
+      "Processing": "Verarbeitung",
+      "Define how missing or incomplete measurements are handled internally.": "Legen Sie fest, wie fehlende oder unvollständige Messwerte intern verarbeitet werden.",
+      "If no phase values are assigned, choose a phase mode other than Direct so act_power for L1 to L3 can be filled.": "Wenn keine Phasenwerte zugeordnet sind, wählen Sie einen Phasenmodus ungleich Direkt, damit act_power für L1 bis L3 gefüllt wird.",
+      "Maximum Measurement Age in Seconds": "Maximales Alter der Messwerte in Sekunden",
+      "Phase Mode": "Phasenmodus",
+      "Direct": "Direkt",
+      "Distribute Total": "Gesamtwert verteilen",
+      "Total on L1": "Gesamtwert auf L1"
+    }
+  }
+}

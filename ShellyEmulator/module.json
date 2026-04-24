@@ -1,0 +1,16 @@
+{
+  "id": "{6D7A8E57-0C5E-43AA-B6A2-1A2F55A02001}",
+  "name": "ShellyEmulator",
+  "type": 3,
+  "vendor": "Marstek",
+  "aliases": ["Marstek Shelly Pro 3EM Emulator"],
+  "parentRequirements": [
+    "{C8792760-65CF-4C53-B5C7-A30FCC84FEFE}"
+  ],
+  "childRequirements": [],
+  "implemented": [
+    "{7A1272A4-CBDB-46EF-BFC6-DCF4A53D2FC7}"
+  ],
+  "prefix": "MSE",
+  "url": "https://github.com/<user>bumaas/MarstekShellyEmulator/blob/master/README.md"
+}

@@ -1,0 +1,265 @@
+{
+  "elements": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Device and Network",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Configure the device identity for the Shelly emulation here. UDP port handling is defined by the parent socket."
+        },
+        {
+          "type": "ValidationTextBox",
+          "name": "deviceName",
+          "caption": "Device Name"
+        },
+        {
+          "type": "ValidationTextBox",
+          "name": "hostname",
+          "caption": "Hostname"
+        },
+        {
+          "type": "ValidationTextBox",
+          "name": "macAddress",
+          "caption": "MAC Address"
+        },
+        {
+          "type": "ValidationTextBox",
+          "name": "firmwareVersion",
+          "caption": "Firmware Version"
+        },
+        {
+          "type": "Label",
+          "caption": "The UDP port relevant for Marstek is configured on the parent socket."
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Total",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Assign the global power and energy variables of the metering point here."
+        },
+        {
+          "type": "Label",
+          "caption": "For Marstek control, Total Power and the phase power values L1 to L3 are the most relevant inputs."
+        },
+        {
+          "type": "SelectVariable",
+          "name": "powerTotalVarId",
+          "caption": "Total Power"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectVariable",
+              "name": "gridImportPowerVarId",
+              "caption": "Import Power",
+              "width": "50%"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "gridExportPowerVarId",
+              "caption": "Export Power",
+              "width": "50%"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectVariable",
+              "name": "importEnergyVarId",
+              "caption": "Import Counter",
+              "width": "50%"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "exportEnergyVarId",
+              "caption": "Export Counter",
+              "width": "50%"
+            }
+          ]
+        },
+        {
+          "type": "NumberSpinner",
+          "name": "energyScaleFactor",
+          "caption": "Counter Scale Factor"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "L1",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Assign the measured values for phase L1 here if they are available individually."
+        },
+        {
+          "type": "SelectVariable",
+          "name": "powerL1VarId",
+          "caption": "Total Power"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectVariable",
+              "name": "gridImportPowerL1VarId",
+              "caption": "Import Power",
+              "width": "50%"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "gridExportPowerL1VarId",
+              "caption": "Export Power",
+              "width": "50%"
+            }
+          ]
+        },
+        {
+          "type": "SelectVariable",
+          "name": "voltageL1VarId",
+          "caption": "Voltage"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "currentL1VarId",
+          "caption": "Current"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "L2",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Assign the measured values for phase L2 here if they are available individually."
+        },
+        {
+          "type": "SelectVariable",
+          "name": "powerL2VarId",
+          "caption": "Total Power"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectVariable",
+              "name": "gridImportPowerL2VarId",
+              "caption": "Import Power",
+              "width": "50%"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "gridExportPowerL2VarId",
+              "caption": "Export Power",
+              "width": "50%"
+            }
+          ]
+        },
+        {
+          "type": "SelectVariable",
+          "name": "voltageL2VarId",
+          "caption": "Voltage"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "currentL2VarId",
+          "caption": "Current"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "L3",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Assign the measured values for phase L3 here if they are available individually."
+        },
+        {
+          "type": "SelectVariable",
+          "name": "powerL3VarId",
+          "caption": "Total Power"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectVariable",
+              "name": "gridImportPowerL3VarId",
+              "caption": "Import Power",
+              "width": "50%"
+            },
+            {
+              "type": "SelectVariable",
+              "name": "gridExportPowerL3VarId",
+              "caption": "Export Power",
+              "width": "50%"
+            }
+          ]
+        },
+        {
+          "type": "SelectVariable",
+          "name": "voltageL3VarId",
+          "caption": "Voltage"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "currentL3VarId",
+          "caption": "Current"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Processing",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Define how missing or incomplete measurements are handled internally."
+        },
+        {
+          "type": "Label",
+          "caption": "If no phase values are assigned, choose a phase mode other than Direct so act_power for L1 to L3 can be filled."
+        },
+        {
+          "type": "NumberSpinner",
+          "name": "maxMeasurementAge",
+          "caption": "Maximum Measurement Age in Seconds"
+        },
+        {
+          "type": "Select",
+          "name": "phaseMode",
+          "caption": "Phase Mode",
+          "options": [
+            {
+              "label": "Direct",
+              "value": "direct"
+            },
+            {
+              "label": "Distribute Total",
+              "value": "split_total"
+            },
+            {
+              "label": "Total on L1",
+              "value": "total_on_l1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "TestCenter"
+    }
+  ]
+}
