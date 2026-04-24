@@ -19,6 +19,8 @@ require_once dirname(__DIR__) . '/libs/Validation.php';
 class ShellyEmulator extends IPSModuleStrict
 {
     private const string UDP_DATAFLOW_TX = '{8E4D9B23-E0F2-1E05-41D8-C21EA53B8706}';
+    private const string UDP_SOCKET_MODULE_ID = '{82347F20-F541-41E1-AC5B-A636FD3AE2D8}';
+    private const int DEFAULT_PARENT_BIND_PORT = 1010;
     private const string PROP_DEVICE_NAME = 'deviceName';
     private const string PROP_HOSTNAME = 'hostname';
     private const string PROP_MAC_ADDRESS = 'macAddress';
@@ -105,6 +107,24 @@ class ShellyEmulator extends IPSModuleStrict
     public function GetConfigurationForm(): string
     {
         return file_get_contents(__DIR__ . '/form.json');
+    }
+
+    public function GetCompatibleParents(): string
+    {
+        return json_encode([
+            'type'      => 'connect',
+            'moduleIDs' => [
+                self::UDP_SOCKET_MODULE_ID,
+            ],
+        ], JSON_THROW_ON_ERROR);
+    }
+
+    public function GetConfigurationForParent(): string
+    {
+        return json_encode([
+            'BindPort' => self::DEFAULT_PARENT_BIND_PORT,
+            'Open'     => true,
+        ], JSON_THROW_ON_ERROR);
     }
 
     public function ReceiveData(string $JSONString): string
