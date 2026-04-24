@@ -1,8 +1,8 @@
-# Umsetzungsgrundlage: IP-Symcon Modul zur Emulation eines Shelly Pro 3EM
+# Umsetzungsgrundlage: Symcon Modul zur Emulation eines Shelly Pro 3EM
 
 ## 1. Ziel
 
-Es soll ein neues, eigenständiges IP-Symcon-Modul-Repository entstehen, das sich gegenüber einer Marstek Venus E als kompatibler Smart Meter ausgibt.
+Es soll ein neues, eigenständiges Symcon-Modul-Repository entstehen, das sich gegenüber einer Marstek Venus E als kompatibler Smart Meter ausgibt.
 
 Das Modul soll:
 

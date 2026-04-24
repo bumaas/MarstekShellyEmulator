@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once dirname(__DIR__) . '/libs/UdpSendTestClient.php';
+
 /**
  * Sends a Shelly-style JSON-RPC UDP request to a local or remote Symcon UDP socket.
  *
@@ -34,54 +36,30 @@ function writeErr(string $message): void
     echo $message . PHP_EOL;
 }
 
-$request = [
-    'id' => $requestId,
-    'src' => 'php-udp-test',
-    'method' => $method,
-    'params' => new stdClass(),
-];
-
-$payload = json_encode($request, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
-
-$socket = @stream_socket_client(
-    sprintf('udp://%s:%d', $host, $port),
-    $errorCode,
-    $errorMessage,
-    2
-);
-if ($socket === false) {
-    writeErr("stream_socket_client failed: [{$errorCode}] {$errorMessage}");
+try {
+    $result = UdpSendTestClient::send($host, $port, $method, $requestId);
+} catch (Throwable $exception) {
+    writeErr('Unexpected exception: ' . $exception->getMessage());
     exit(1);
 }
 
-stream_set_timeout($socket, 2);
-
-$sent = @fwrite($socket, $payload);
-if ($sent === false) {
-    writeErr('fwrite failed while sending UDP payload.');
-    fclose($socket);
+if (!$result['ok']) {
+    writeErr((string) $result['error']);
     exit(1);
 }
 
-writeOut("Sent {$sent} bytes to {$host}:{$port}");
-writeOut("Request: {$payload}");
+writeOut("Sent {$result['sentBytes']} bytes to {$host}:{$port}");
+writeOut('Request: ' . $result['payload']);
 
-$responseBuffer = @fread($socket, 8192);
-$metadata = stream_get_meta_data($socket);
-
-if ($responseBuffer === false || ($responseBuffer === '' && ($metadata['timed_out'] ?? false))) {
+if (($result['response'] === '') && $result['timedOut']) {
     writeOut('No response received within timeout.');
-    fclose($socket);
     exit(0);
 }
 
-writeOut('Received ' . strlen($responseBuffer) . " bytes.");
-writeOut("Response: {$responseBuffer}");
+writeOut('Received ' . $result['responseBytes'] . ' bytes.');
+writeOut('Response: ' . $result['response']);
 
-$decoded = json_decode($responseBuffer, true);
-if (is_array($decoded)) {
+if (is_array($result['decodedResponse'])) {
     writeOut('Decoded response:');
-    writeOut(json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    writeOut(json_encode($result['decodedResponse'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
 }
-
-fclose($socket);

@@ -122,8 +122,7 @@ class ShellyEmulator extends IPSModuleStrict
     public function GetConfigurationForParent(): string
     {
         return json_encode([
-            'BindPort' => self::DEFAULT_PARENT_BIND_PORT,
-            'Open'     => true,
+            'BindPort' => self::DEFAULT_PARENT_BIND_PORT
         ], JSON_THROW_ON_ERROR);
     }
 
