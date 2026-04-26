@@ -58,13 +58,13 @@
               "type": "SelectVariable",
               "name": "gridImportPowerVarId",
               "caption": "Import Power",
-              "width": "50%"
+              "width": "450px"
             },
             {
               "type": "SelectVariable",
               "name": "gridExportPowerVarId",
               "caption": "Export Power",
-              "width": "50%"
+              "width": "450px"
             }
           ]
         },
@@ -75,13 +75,13 @@
               "type": "SelectVariable",
               "name": "importEnergyVarId",
               "caption": "Import Counter",
-              "width": "50%"
+              "width": "450px"
             },
             {
               "type": "SelectVariable",
               "name": "exportEnergyVarId",
               "caption": "Export Counter",
-              "width": "50%"
+              "width": "450px"
             }
           ]
         },
@@ -112,13 +112,13 @@
               "type": "SelectVariable",
               "name": "gridImportPowerL1VarId",
               "caption": "Import Power",
-              "width": "50%"
+              "width": "450px"
             },
             {
               "type": "SelectVariable",
               "name": "gridExportPowerL1VarId",
               "caption": "Export Power",
-              "width": "50%"
+              "width": "450px"
             }
           ]
         },
@@ -154,13 +154,13 @@
               "type": "SelectVariable",
               "name": "gridImportPowerL2VarId",
               "caption": "Import Power",
-              "width": "50%"
+              "width": "450px"
             },
             {
               "type": "SelectVariable",
               "name": "gridExportPowerL2VarId",
               "caption": "Export Power",
-              "width": "50%"
+              "width": "450px"
             }
           ]
         },
@@ -196,13 +196,13 @@
               "type": "SelectVariable",
               "name": "gridImportPowerL3VarId",
               "caption": "Import Power",
-              "width": "50%"
+              "width": "450px"
             },
             {
               "type": "SelectVariable",
               "name": "gridExportPowerL3VarId",
               "caption": "Export Power",
-              "width": "50%"
+              "width": "450px"
             }
           ]
         },

@@ -12,71 +12,71 @@ require_once __DIR__ . '/MeasurementSnapshot.php';
  */
 final class MeasurementCalculator
 {
-    private const string PROP_POWER_TOTAL_VAR_ID = 'powerTotalVarId';
-    private const string PROP_GRID_IMPORT_POWER_VAR_ID = 'gridImportPowerVarId';
-    private const string PROP_GRID_EXPORT_POWER_VAR_ID = 'gridExportPowerVarId';
-    private const string PROP_POWER_L1_VAR_ID = 'powerL1VarId';
+    private const string PROP_POWER_TOTAL_VAR_ID          = 'powerTotalVarId';
+    private const string PROP_GRID_IMPORT_POWER_VAR_ID    = 'gridImportPowerVarId';
+    private const string PROP_GRID_EXPORT_POWER_VAR_ID    = 'gridExportPowerVarId';
+    private const string PROP_POWER_L1_VAR_ID             = 'powerL1VarId';
     private const string PROP_GRID_IMPORT_POWER_L1_VAR_ID = 'gridImportPowerL1VarId';
     private const string PROP_GRID_EXPORT_POWER_L1_VAR_ID = 'gridExportPowerL1VarId';
-    private const string PROP_POWER_L2_VAR_ID = 'powerL2VarId';
+    private const string PROP_POWER_L2_VAR_ID             = 'powerL2VarId';
     private const string PROP_GRID_IMPORT_POWER_L2_VAR_ID = 'gridImportPowerL2VarId';
     private const string PROP_GRID_EXPORT_POWER_L2_VAR_ID = 'gridExportPowerL2VarId';
-    private const string PROP_POWER_L3_VAR_ID = 'powerL3VarId';
+    private const string PROP_POWER_L3_VAR_ID             = 'powerL3VarId';
     private const string PROP_GRID_IMPORT_POWER_L3_VAR_ID = 'gridImportPowerL3VarId';
     private const string PROP_GRID_EXPORT_POWER_L3_VAR_ID = 'gridExportPowerL3VarId';
-    private const string PROP_VOLTAGE_L1_VAR_ID = 'voltageL1VarId';
-    private const string PROP_VOLTAGE_L2_VAR_ID = 'voltageL2VarId';
-    private const string PROP_VOLTAGE_L3_VAR_ID = 'voltageL3VarId';
-    private const string PROP_CURRENT_L1_VAR_ID = 'currentL1VarId';
-    private const string PROP_CURRENT_L2_VAR_ID = 'currentL2VarId';
-    private const string PROP_CURRENT_L3_VAR_ID = 'currentL3VarId';
-    private const string PROP_IMPORT_ENERGY_VAR_ID = 'importEnergyVarId';
-    private const string PROP_EXPORT_ENERGY_VAR_ID = 'exportEnergyVarId';
-    private const string PROP_MAX_MEASUREMENT_AGE = 'maxMeasurementAge';
-    private const string PROP_PHASE_MODE = 'phaseMode';
-    private const string PROP_ENERGY_SCALE_FACTOR = 'energyScaleFactor';
-    private const float DEFAULT_VOLTAGE_V = 230.0;
+    private const string PROP_VOLTAGE_L1_VAR_ID           = 'voltageL1VarId';
+    private const string PROP_VOLTAGE_L2_VAR_ID           = 'voltageL2VarId';
+    private const string PROP_VOLTAGE_L3_VAR_ID           = 'voltageL3VarId';
+    private const string PROP_CURRENT_L1_VAR_ID           = 'currentL1VarId';
+    private const string PROP_CURRENT_L2_VAR_ID           = 'currentL2VarId';
+    private const string PROP_CURRENT_L3_VAR_ID           = 'currentL3VarId';
+    private const string PROP_IMPORT_ENERGY_VAR_ID        = 'importEnergyVarId';
+    private const string PROP_EXPORT_ENERGY_VAR_ID        = 'exportEnergyVarId';
+    private const string PROP_MAX_MEASUREMENT_AGE         = 'maxMeasurementAge';
+    private const string PROP_PHASE_MODE                  = 'phaseMode';
+    private const string PROP_ENERGY_SCALE_FACTOR         = 'energyScaleFactor';
+    private const float  DEFAULT_VOLTAGE_V                = 230.0;
 
     /**
-     * @param array<string, int> $integerProperties
+     * @param array<string, int>    $integerProperties
      * @param array<string, string> $stringProperties
-     * @param array<string, float> $floatProperties
+     * @param array<string, float>  $floatProperties
      */
     public static function fromConfiguration(array $integerProperties, array $stringProperties, array $floatProperties = []): MeasurementSnapshot
     {
-        $snapshot = new MeasurementSnapshot();
+        $snapshot            = new MeasurementSnapshot();
         $snapshot->timestamp = self::resolveSnapshotTimestamp($integerProperties);
 
         $snapshot->totalActivePowerW = self::readFloat($integerProperties, self::PROP_POWER_TOTAL_VAR_ID);
         self::deriveTotalPowerFromImportExport($integerProperties, $snapshot);
-        $snapshot->phaseAActivePowerW = self::readFloat($integerProperties, self::PROP_POWER_L1_VAR_ID);
-        $snapshot->phaseAActivePowerW = self::derivePowerFromImportExport(
+        $snapshot->phaseAActivePowerW    = self::readFloat($integerProperties, self::PROP_POWER_L1_VAR_ID);
+        $snapshot->phaseAActivePowerW    = self::derivePowerFromImportExport(
             $integerProperties,
             $snapshot->phaseAActivePowerW,
             self::PROP_GRID_IMPORT_POWER_L1_VAR_ID,
             self::PROP_GRID_EXPORT_POWER_L1_VAR_ID
         );
-        $snapshot->phaseBActivePowerW = self::readFloat($integerProperties, self::PROP_POWER_L2_VAR_ID);
-        $snapshot->phaseBActivePowerW = self::derivePowerFromImportExport(
+        $snapshot->phaseBActivePowerW    = self::readFloat($integerProperties, self::PROP_POWER_L2_VAR_ID);
+        $snapshot->phaseBActivePowerW    = self::derivePowerFromImportExport(
             $integerProperties,
             $snapshot->phaseBActivePowerW,
             self::PROP_GRID_IMPORT_POWER_L2_VAR_ID,
             self::PROP_GRID_EXPORT_POWER_L2_VAR_ID
         );
-        $snapshot->phaseCActivePowerW = self::readFloat($integerProperties, self::PROP_POWER_L3_VAR_ID);
-        $snapshot->phaseCActivePowerW = self::derivePowerFromImportExport(
+        $snapshot->phaseCActivePowerW    = self::readFloat($integerProperties, self::PROP_POWER_L3_VAR_ID);
+        $snapshot->phaseCActivePowerW    = self::derivePowerFromImportExport(
             $integerProperties,
             $snapshot->phaseCActivePowerW,
             self::PROP_GRID_IMPORT_POWER_L3_VAR_ID,
             self::PROP_GRID_EXPORT_POWER_L3_VAR_ID
         );
-        $snapshot->phaseAVoltageV = self::readFloat($integerProperties, self::PROP_VOLTAGE_L1_VAR_ID);
-        $snapshot->phaseBVoltageV = self::readFloat($integerProperties, self::PROP_VOLTAGE_L2_VAR_ID);
-        $snapshot->phaseCVoltageV = self::readFloat($integerProperties, self::PROP_VOLTAGE_L3_VAR_ID);
-        $snapshot->phaseACurrentA = self::readFloat($integerProperties, self::PROP_CURRENT_L1_VAR_ID);
-        $snapshot->phaseBCurrentA = self::readFloat($integerProperties, self::PROP_CURRENT_L2_VAR_ID);
-        $snapshot->phaseCCurrentA = self::readFloat($integerProperties, self::PROP_CURRENT_L3_VAR_ID);
-        $energyScaleFactor = self::resolveEnergyScaleFactor($floatProperties);
+        $snapshot->phaseAVoltageV        = self::readFloat($integerProperties, self::PROP_VOLTAGE_L1_VAR_ID);
+        $snapshot->phaseBVoltageV        = self::readFloat($integerProperties, self::PROP_VOLTAGE_L2_VAR_ID);
+        $snapshot->phaseCVoltageV        = self::readFloat($integerProperties, self::PROP_VOLTAGE_L3_VAR_ID);
+        $snapshot->phaseACurrentA        = self::readFloat($integerProperties, self::PROP_CURRENT_L1_VAR_ID);
+        $snapshot->phaseBCurrentA        = self::readFloat($integerProperties, self::PROP_CURRENT_L2_VAR_ID);
+        $snapshot->phaseCCurrentA        = self::readFloat($integerProperties, self::PROP_CURRENT_L3_VAR_ID);
+        $energyScaleFactor               = self::resolveEnergyScaleFactor($floatProperties);
         $snapshot->totalImportedEnergyWh = self::scaleEnergyValue(
             self::readFloat($integerProperties, self::PROP_IMPORT_ENERGY_VAR_ID),
             $energyScaleFactor
@@ -110,11 +110,11 @@ final class MeasurementCalculator
             return null;
         }
 
-        if (!is_numeric((string) $value)) {
+        if (!is_numeric((string)$value)) {
             return null;
         }
 
-        return (float) $value;
+        return (float)$value;
     }
 
     /**
@@ -130,7 +130,7 @@ final class MeasurementCalculator
                 continue;
             }
 
-            $timestamps[] = (int) $variable['VariableUpdated'];
+            $timestamps[] = (int)$variable['VariableUpdated'];
         }
 
         if ($timestamps === []) {
@@ -237,10 +237,10 @@ final class MeasurementCalculator
             return;
         }
 
-        $phaseMode = $stringProperties[self::PROP_PHASE_MODE] ?? 'direct';
+        $phaseMode     = $stringProperties[self::PROP_PHASE_MODE] ?? 'direct';
         $phasesMissing = $snapshot->phaseAActivePowerW === null
-            && $snapshot->phaseBActivePowerW === null
-            && $snapshot->phaseCActivePowerW === null;
+                         && $snapshot->phaseBActivePowerW === null
+                         && $snapshot->phaseCActivePowerW === null;
 
         if (!$phasesMissing) {
             return;
@@ -248,7 +248,7 @@ final class MeasurementCalculator
 
         // This fallback only applies when the source exposes a total power value.
         if ($phaseMode === 'split_total') {
-            $perPhase = $snapshot->totalActivePowerW / 3.0;
+            $perPhase                     = $snapshot->totalActivePowerW / 3.0;
             $snapshot->phaseAActivePowerW = $perPhase;
             $snapshot->phaseBActivePowerW = $perPhase;
             $snapshot->phaseCActivePowerW = $perPhase;
