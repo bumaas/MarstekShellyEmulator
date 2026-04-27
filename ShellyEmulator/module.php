@@ -124,13 +124,15 @@ class ShellyEmulator extends IPSModuleStrict
 
     public function ReceiveData(string $JSONString): string
     {
-        $this->SendDebug(__FUNCTION__, $JSONString, 0);
+        $this->SendDebug(__FUNCTION__ . ' (raw)', $JSONString, 0);
 
         // Symcon's UDP socket forwards payload plus sender metadata in a JSON envelope.
         [$payload, $remoteIp, $remotePort] = $this->extractTransportContext($JSONString);
         if ($payload === '') {
             return '';
         }
+
+        $this->SendDebug(__FUNCTION__ . ' (payload)', $payload, 0);
 
         $response = $this->handleRpcRequest($payload, $remoteIp, $remotePort);
         if ($response === null) {
@@ -345,7 +347,7 @@ class ShellyEmulator extends IPSModuleStrict
         $payload  = UdpRpcCodec::encode($message);
         $envelope = $this->buildUdpResponseEnvelope($payload, $remoteIp, $remotePort);
 
-        $this->SendDebug(__FUNCTION__, json_encode($envelope, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE), 0);
+        $this->SendDebug(__FUNCTION__ . ' (payload)', json_encode($message, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE), 0);
 
         $result = @$this->SendDataToParent(json_encode($envelope, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE));
         $this->SendDebug(__FUNCTION__ . '.parentResult', var_export($result, true), 0);
