@@ -22,6 +22,9 @@ Funktionsfähiger Minimalemulator für Shelly Pro 3EM über den Symcon-UDP-Paren
 ## Konfiguration
 
 - Der UDP-Port wird am Parent-Socket konfiguriert, nicht im Modul selbst.
+- Damit eingehende Marstek-UDP-Anfragen den Emulator erreichen, sollte im Symcon-UDP-Parent der `Empfangs-Host` auf `Alle` stehen.
+- Hintergrund: Die Marstek nutzt für ihre Anfrage-/Discovery-Kommunikation kein festes Quell-/Ziel-Host-Schema; eine zu enge Empfangsbindung am IO kann die Pakete deshalb verwerfen.
+- `Sende-Host` und `Sende-Port` können optional gesetzt werden, um Antworten bzw. Anfragen auf die erwartete Gegenstelle einzugrenzen. Das ist ein Filter und keine Grundvoraussetzung fuer den Betrieb.
 
 Empfohlene Reihenfolge für die erste Zuordnung im Formular:
 
