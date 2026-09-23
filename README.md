@@ -1,6 +1,6 @@
 # MarstekShellyEmulator
 
-IP-Symcon-Modul zur Emulation eines Shelly Pro 3EM für eine Marstek Venus E.
+Symcon-Modul zur Emulation eines Shelly Pro 3EM für eine Marstek Venus E.
 
 ## Status
 
